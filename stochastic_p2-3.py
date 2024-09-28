@@ -100,3 +100,4 @@ print(f"Y𝜶/2: {y_alpha_over_2}")
 print(f"Confidence Interval for the mean: [{lower_bound:.5f}, {upper_bound:.5f}]") 
 
 plt.show()
+plt.showwwwww
