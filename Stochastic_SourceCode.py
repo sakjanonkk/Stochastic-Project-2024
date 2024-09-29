@@ -73,7 +73,7 @@ else:
     
 #************* ข้อ 4 ************
 Sn = np.std(X,ddof=1)        #           
-dofํ_Y_alpha_over_2 = N - 1   #degree of freedom (v)
+dofํ_Y_alpha_over_2 = n - 1   #degree of freedom (v)
 y_alpha_over_2 = stats.t.ppf(1 - alpha/2, dofํ_Y_alpha_over_2)
 
 # คำนวณ confidence interval
@@ -102,5 +102,5 @@ print(f"* Sn (σ)                                   : {Sn:.5f}")
 print(f"* Degree of freedom (v = n - 1)            : {dofํ_Y_alpha_over_2}")
 print(f"* Y𝜶/2                                     : {y_alpha_over_2:.5f}")
 print(f"* Confidence Interval for the mean         : [{lower_bound:.5f}, {upper_bound:.5f}]") 
-print("\033[4mhello\033[0m")
-plt.show() 
+
+# plt.show() 
