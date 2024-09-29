@@ -55,48 +55,53 @@ for j in range(N + 1):
 #--- degree of freedom ---
 m = nbins                                       # number of bins
 r = 2                                           # จำนวน parameter ของ binomial (n,p)
-dof = m - 1 - r                                 # degree of freedom
+dof_k = m - 1 - r                               # degree of freedom (k)
 #--- Z𝜶 ---
 alpha = 0.05                                    # significance level = 5% , 𝜶 = 5%
-Z_alpha = stats.chi2.ppf(1-alpha, dof)          # Z𝜶
-
-
-# สรุปข้อมูลจากข้อ 2 - 3 ไอ่สัส
+Z_alpha = stats.chi2.ppf(1-alpha, dof_k)          # Z𝜶
+#_____ ตรวจสอบความ goodness ของ candidate PMF ______
 check_goodness = ""
 compareZ = ""
 
 if Z < Z_alpha:
-    goodness = "good fit to the data"
+    goodness = "\033[4mgood fit to the data\033[0m"
     compareZ = "(Z < Z𝜶)"
 else:
-    goodness = "not good fit to the data"
+    goodness = "\033[4mnot good fit to the data\033[0m"
     compareZ = "(Z > Z𝜶)"
-
-print("************ Histogram ******************\n*")
-print(f"* bins              : {nbins} bins")
-print(f"* Mean              : {Mn:.5f}")
-print(f"* Probability       : {pn:.5f} ({(pn * 100):.1f}%)\n*")
-
-print("***** Candidate PMF is goodness or not ***\n*")
-print(f"* Degree of freedom : {dof}")
-print(f"* a statistics (Z)  : {Z:.5f}")
-print(f"* threshold (Z𝜶)    : {Z_alpha:.5f}\n*")
-print(f"* {compareZ} so {goodness}\n*")
-print("*****************************************")
-
-
-dofํ_Y_alpha_over_2 = n - 1
-Sn = np.std(X,ddof=1)
+    
+    
+#************* ข้อ 4 ************
+Sn = np.std(X,ddof=1)        #           
+dofํ_Y_alpha_over_2 = n - 1   #degree of freedom (v)
 y_alpha_over_2 = stats.t.ppf(1 - alpha/2, dofํ_Y_alpha_over_2)
-# ขนาดของข้อมูลตัวอย่าง
-n = len(X)
 
 # คำนวณ confidence interval
 lower_bound = Mn - y_alpha_over_2 * (Sn / np.sqrt(n))
 upper_bound = Mn + y_alpha_over_2 * (Sn / np.sqrt(n))
 
-print(f"Sn: {Sn}")
-print(f"Y𝜶/2: {y_alpha_over_2}")
-print(f"Confidence Interval for the mean: [{lower_bound:.5f}, {upper_bound:.5f}]") 
 
-plt.show()
+
+# Summary
+print("************ Histogram ******************\n*")
+print(f"* min(X)                                   : {minX} ")
+print(f"* max(X)                                   : {maxX} ")
+print(f"* bins                                     : {nbins} bins")
+print(f"* Mean                                     : {Mn:.5f}")
+print(f"* Probability                              : {pn:.5f} ({(pn * 100):.1f}%)\n*")
+
+
+print("***** Candidate PMF is goodness or not ****\n*")
+print(f"* Degree of freedom (k)                    : {dof_k}")
+print(f"* a statistics (Z)                         : {Z:.5f}")
+print(f"* threshold (Z𝜶)                           : {Z_alpha:.5f}")
+print(f"* {compareZ} so candidate pmf is {goodness}.\n*")
+
+
+print("**** Confidence interval for the mean ******\n*")
+print(f"* Sn (σ)                                   : {Sn:.5f}")
+print(f"* Degree of freedom (v = n - 1)            : {dofํ_Y_alpha_over_2}")
+print(f"* Y𝜶/2                                     : {y_alpha_over_2:.5f}")
+print(f"* Confidence Interval for the mean         : [{lower_bound:.5f}, {upper_bound:.5f}]") 
+print("\033[4mhello\033[0m")
+plt.show() 
