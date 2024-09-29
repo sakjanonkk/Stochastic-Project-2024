@@ -73,13 +73,12 @@ else:
     
 #************* ข้อ 4 ************
 Sn = np.std(X,ddof=1)        #           
-dofํ_Y_alpha_over_2 = n - 1   #degree of freedom (v)
+dofํ_Y_alpha_over_2 = N - 1   #degree of freedom (v)
 y_alpha_over_2 = stats.t.ppf(1 - alpha/2, dofํ_Y_alpha_over_2)
 
 # คำนวณ confidence interval
 lower_bound = Mn - y_alpha_over_2 * (Sn / np.sqrt(n))
 upper_bound = Mn + y_alpha_over_2 * (Sn / np.sqrt(n))
-
 
 
 # Summary
